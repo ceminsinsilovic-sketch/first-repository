@@ -1,15 +1,21 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"study/FirstGit"
-	"study/feature2"
-	"study/feaure3"
+	simplesql "study/simpleSql"
+	"study/simpleSql/sqlfunc"
 )
-func main(){
-	fmt.Println("Hello Git")
-	firstgit.Tig()
-	feature2.Feature2()
-	feaure3.Feature3()
-}
 
+func main() {
+	ctx := context.Background()
+	conn, err := simplesql.Connect(ctx)
+	if err != nil {
+		panic(err)
+	}
+	err = sqlfunc.CreateTable(ctx, conn)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("succed")
+}
